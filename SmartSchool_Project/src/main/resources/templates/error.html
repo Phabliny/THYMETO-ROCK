@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erro!</title>
+</head>
+<body>
+    <div class="jumbotron text-center">
+        <h1 class="alert alert-danger" th:text="'Erro ' + (${status}?${status}:'')">Erro!</h1>
+        <h6 class="alert alert-danger" th:if="${mensagem}" th:text="${mensagem}"></h6>
+        <h6 class="alert alert-danger" th:if="${error}" th:text="${error}"></h6>
+    </div>
+</body>
+</html>
