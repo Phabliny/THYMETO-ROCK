@@ -82,8 +82,8 @@ public class AdminAtualizaAlunoController {
     }
 
     @RequestMapping(value = "/manteralunos", method = RequestMethod.POST)
-    public String atualizarAluno(@RequestParam(value = "usuario.cpf", required = true) String cpf, Aluno aluno,
-            Model model) {
+    public String atualizarAluno(@RequestParam(value = "usuario.cpf", required = true) String cpf, Aluno aluno, Model model) {
+        
         Integer result = repo.atualizarAluno(cpf, aluno);
         if (result != null && result > 0) {
             model.addAttribute("sucessmensage", "Aluno atualizado com sucesso!");
