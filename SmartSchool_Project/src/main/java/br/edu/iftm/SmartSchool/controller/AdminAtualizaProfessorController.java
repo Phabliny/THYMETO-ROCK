@@ -37,6 +37,7 @@ public class AdminAtualizaProfessorController {
         try {
             repoP.gravarProfessor(professor);
             raP.addFlashAttribute("sucessmensage","Professor cadastrado com sucesso!");
+            
             return "redirect:/cadastroprofessor";
         } catch (DataIntegrityViolationException e) {
             System.out.println("----------------> " + e.getMessage());

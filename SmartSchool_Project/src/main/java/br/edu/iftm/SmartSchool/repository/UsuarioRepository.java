@@ -10,8 +10,8 @@ import br.edu.iftm.SmartSchool.model.Usuario;
 public class UsuarioRepository {
     @Autowired
     JdbcTemplate jdbc;
+
     public Usuario buscaPorLogin(String username) {
-        System.out.println("---------------------------------->" + username);
         return jdbc.queryForObject(
                 "select * from usuario where login = ?",
                 (res, linha) -> {
@@ -20,7 +20,24 @@ public class UsuarioRepository {
                     res.getString("telefone"), res.getDate("data_nasc"),
                     res.getString("email"),
                     res.getString("nome"), res.getString("cpf"),
-                    res.getString("endereco"));},
+                    res.getString("endereco"),
+                    res.getString("reset_password_token"),
+                    res.getString("papel"));},
                 username);
+    }
+
+    public Usuario buscaPorEmail(String email) {
+        return jdbc.queryForObject(
+                "select * from usuario where email = ?",
+                (res, linha) -> {
+                    return new Usuario(res.getString("login"), res.getString("senha"),
+                    res.getString("rg"),
+                    res.getString("telefone"), res.getDate("data_nasc"),
+                    res.getString("email"),
+                    res.getString("nome"), res.getString("cpf"),
+                    res.getString("endereco"),
+                    res.getString("reset_password_token"),
+                    res.getString("papel"));},
+                email);
     }
 }

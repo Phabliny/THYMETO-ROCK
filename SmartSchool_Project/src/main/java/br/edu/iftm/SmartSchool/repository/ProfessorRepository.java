@@ -28,16 +28,17 @@ public class ProfessorRepository {
                                                                 res.getString("telefone"), res.getDate("data_nasc"),
                                                                 res.getString("email"),
                                                                 res.getString("nome"), res.getString("cpf"),
-                                                                res.getString("endereco")),
+                                                                res.getString("endereco"),res.getString("reset_password_token"),res.getString("papel")
+                                                                ),
                                                 res.getString("cod_professor")));
         }
 
         public Integer gravarProfessor(Professor professor) {
                 Usuario us = professor.getUsuario();
-                String sqlUsuario = "insert into usuario(login, senha, rg, telefone, data_nasc, email, nome, cpf, endereco) values(?,?,?,?,?,?,?,?,?)";
+                String sqlUsuario = "insert into usuario(login, senha, rg, telefone, data_nasc, email, nome, cpf, endereco, papel) values(?,?,?,?,?,?,?,?,?,?)";
                 String sqlProfessor = "insert into professor(cod_professor, usuario_login) values(?,?)";
                 jdbc.update(sqlUsuario, us.getLogin(), us.getSenha(), us.getRg(), us.getTelefone(), us.getDataNasc(),
-                                us.getEmail(), us.getNome(), us.getCpf(), us.getEndereco());
+                                us.getEmail(), us.getNome(), us.getCpf(), us.getEndereco(), us.getPapel());
                                 
                 return jdbc.update(sqlProfessor, professor.getCod_professor(), professor.getUsuario().getLogin());
         }
@@ -67,7 +68,7 @@ public class ProfessorRepository {
                                                                 res.getString("telefone"), res.getDate("data_nasc"),
                                                                 res.getString("email"),
                                                                 res.getString("nome"), res.getString("cpf"),
-                                                                res.getString("endereco")),
+                                                                res.getString("endereco"),res.getString("reset_password_token"),res.getString("papel")),
                                                 res.getString("cod_professor")),
                                 login);
         }
@@ -87,7 +88,7 @@ public class ProfessorRepository {
                                                                                 res.getString("email"),
                                                                                 res.getString("nome"),
                                                                                 res.getString("cpf"),
-                                                                                res.getString("endereco")),
+                                                                                res.getString("endereco"),res.getString("reset_password_token"),res.getString("papel")),
                                                                 res.getString("cod_professor"));
                                         }, new Object[] { cpf });
                 } catch (Exception e) {
