@@ -26,3 +26,6 @@ main {
         width: auto !important;
     }
 }
+.input-group {
+    padding: 10px;
+}
