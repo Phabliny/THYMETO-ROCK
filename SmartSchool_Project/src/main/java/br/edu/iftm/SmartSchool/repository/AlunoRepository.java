@@ -29,7 +29,7 @@ public class AlunoRepository {
                                                                 res.getString("telefone"), res.getDate("data_nasc"),
                                                                 res.getString("email"),
                                                                 res.getString("nome"), res.getString("cpf"),
-                                                                res.getString("endereco")),
+                                                                res.getString("endereco"),res.getString("reset_password_token"),res.getString("papel")),
                                                 res.getString("matricula"), res.getString("nome_mae"),
                                                 res.getString("nome_pai"),
                                                 res.getDate("data_matricula"), res.getString("tel_responsavel")));
@@ -37,7 +37,7 @@ public class AlunoRepository {
 
         public Integer gravaAluno(Aluno aluno) {
                 Usuario us = aluno.getUsuario();
-                String sqlUsuario = "insert into usuario(login, senha, rg, telefone, data_nasc, email, nome, cpf, endereco) values(?,?,?,?,?,?,?,?,?)";
+                String sqlUsuario = "insert into usuario(login, senha, rg, telefone, data_nasc, email, nome, cpf, endereco, papel) values(?,?,?,?,?,?,?,?,?,?)";
                 String sqlAluno = "insert into aluno(matricula,nome_mae,nome_pai,data_matricula,tel_responsavel,usuario_login) values(?,?,?,?,?,?)";
 
                 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -45,9 +45,9 @@ public class AlunoRepository {
                 String encodedPassword = passwordEncoder.encode(us.getSenha());
 
                 us.setSenha(encodedPassword);
-                
+                us.setPapel("aluno");
                 jdbc.update(sqlUsuario, us.getLogin(), us.getSenha(), us.getRg(), us.getTelefone(), us.getDataNasc(),
-                                us.getEmail(), us.getNome(), us.getCpf(), us.getEndereco());
+                                us.getEmail(), us.getNome(), us.getCpf(), us.getEndereco(), us.getPapel());
                 return jdbc.update(sqlAluno, aluno.getMatricula(), aluno.getNomeMae(), aluno.getNomePai(),
                                 aluno.getDataMatricula(), aluno.getTelResponsavel(), aluno.getUsuario().getLogin());
         }
@@ -78,7 +78,7 @@ public class AlunoRepository {
                                                                 res.getString("telefone"), res.getDate("data_nasc"),
                                                                 res.getString("email"),
                                                                 res.getString("nome"), res.getString("cpf"),
-                                                                res.getString("endereco")),
+                                                                res.getString("endereco"),res.getString("reset_password_token"),res.getString("papel")),
                                                 res.getString("matricula"), res.getString("nome_mae"),
                                                 res.getString("nome_pai"),
                                                 res.getDate("data_matricula"), res.getString("tel_responsavel")),
@@ -100,7 +100,7 @@ public class AlunoRepository {
                                                                                 res.getString("email"),
                                                                                 res.getString("nome"),
                                                                                 res.getString("cpf"),
-                                                                                res.getString("endereco")),
+                                                                                res.getString("endereco"),res.getString("reset_password_token"),res.getString("papel")),
                                                                 res.getString("matricula"), res.getString("nome_mae"),
                                                                 res.getString("nome_pai"),
                                                                 res.getDate("data_matricula"),

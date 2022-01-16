@@ -17,6 +17,9 @@ CREATE TABLE IF NOT EXISTS `usuario`
 (11) NOT NULL UNIQUE,
   `endereco` varchar
 (200) DEFAULT NULL,
+  `reset_password_token` varchar
+(45) DEFAULT NULL,
+`papel` SET ('admin', 'aluno', 'professor'),
   PRIMARY KEY
 (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

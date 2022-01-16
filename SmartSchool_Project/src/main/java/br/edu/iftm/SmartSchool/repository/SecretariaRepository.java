@@ -16,20 +16,12 @@ public class SecretariaRepository {
     
     public Integer gravaSecretaria(Secretaria adm) {
         Usuario us = adm.getUsuario();
-
         String sqlUsuario = "insert into usuario(login, senha, rg, telefone, data_nasc, email, nome, cpf, endereco) values('webmaster',123456789,1254845,34996775783,'1995-12-08','webmaster@gmail.com','ADMIN',32165498721,'Rua 105')";
-
         String sqlSecretaria = "insert into administrador(cod_adm, usuario_login) values('webmaster',123456789)";
-        System.out.println("++++++++++++++++" + sqlSecretaria);
-        System.out.println("****************" +sqlUsuario);
-
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        
         String encodedPassword = passwordEncoder.encode(us.getSenha());
-        System.out.println("?????????????????" +encodedPassword);
-
         us.setSenha(encodedPassword);
-        
+        us.setPapel("admin");
         jdbc.update(sqlUsuario, us.getLogin(), us.getSenha(), us.getRg(), us.getTelefone(), us.getDataNasc(), us.getEmail(), us.getNome(), us.getCpf(), us.getEndereco());
         return jdbc.update(sqlSecretaria, adm.getCod_adm(), adm.getUsuario());
     }

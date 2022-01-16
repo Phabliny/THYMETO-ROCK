@@ -22,12 +22,13 @@ public class Usuario implements java.io.Serializable {
 	@Size(min = 11, message = "O CPF deve possuir exatamente 11 digitos, apenas números!")
 	private String cpf;
 	private String endereco;
+	private String reset_password_token;
+	private String papel;
 
 	public Usuario() {
 	}
 
-	public Usuario(String login, String senha, String rg, String telefone, Date dataNasc, String email, String nome,
-			String cpf, String endereco) {
+	public Usuario(String login, String senha, String rg, String telefone, Date dataNasc, String email, String nome, String cpf, String endereco, String reset_password_token, String papel) {
 		this.login = login;
 		this.senha = senha;
 		this.rg = rg;
@@ -37,6 +38,8 @@ public class Usuario implements java.io.Serializable {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.endereco = endereco;
+		this.reset_password_token = reset_password_token;
+		this.papel = papel;
 	}
 
 	public String getLogin() {
@@ -109,5 +112,21 @@ public class Usuario implements java.io.Serializable {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getReset_password_token() {
+		return this.reset_password_token;
+	}
+
+	public void setReset_password_token(String reset_password_token) {
+		this.reset_password_token = reset_password_token;
+	}
+
+	public String getPapel() {
+		return this.papel;
+	}
+
+	public void setPapel(String papel) {
+		this.papel = papel;
 	}
 }
