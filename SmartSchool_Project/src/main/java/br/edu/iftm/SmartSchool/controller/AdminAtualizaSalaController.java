@@ -76,7 +76,7 @@ public class AdminAtualizaSalaController {
                 //    throw new BuscaPorCodSalaException(identidadeSala);
                 System.out.println("------------------------------------->" + identidadeSala);
                 model.addAttribute("sala", sala);
-                model.addAttribute("error", "Usuario inexistente");
+                model.addAttribute("error", "Sala inexistente");
                 return "mantersala";
                }
             }
