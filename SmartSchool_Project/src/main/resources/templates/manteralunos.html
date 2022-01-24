@@ -32,18 +32,13 @@
         </li>
     </ul>
 
-    <div
-        class="alert alert-danger"
-        role="alert"
-        th:if="${!#strings.isEmpty(dangermensage)}"
-    >
+    <div class="alert alert-danger" role="alert" th:if="${error}">
+        <span th:text="${error}">!</span>
+    </div>
+    <div class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(dangermensage)}">
         <span th:text="${dangermensage}">!</span>
     </div>
-    <div
-        class="alert alert-success"
-        role="alert"
-        th:if="${!#strings.isEmpty(sucessmensage)}"
-    >
+    <div class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(sucessmensage)}">
         <span th:text="${sucessmensage}">!</span>
     </div>
 
@@ -80,6 +75,7 @@
                 readonly
             />
         </div>
+
         <div class="input-group">
             <span class="input-group-text">RG</span>
             <input

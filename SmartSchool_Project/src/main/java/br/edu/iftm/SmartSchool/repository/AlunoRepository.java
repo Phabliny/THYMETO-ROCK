@@ -26,19 +26,31 @@ public class AlunoRepository {
                                 (res, linha) -> new Aluno(
                                                 new Usuario(res.getString("login"), res.getString("senha"),
                                                                 res.getString("rg"),
-                                                                res.getString("telefone"), res.getDate("data_nasc"),
+                                                                res.getString("telefone"), res.getDate("dataNasc"),
                                                                 res.getString("email"),
                                                                 res.getString("nome"), res.getString("cpf"),
-                                                                res.getString("endereco"),res.getString("reset_password_token"),res.getString("papel")),
-                                                res.getString("matricula"), res.getString("nome_mae"),
-                                                res.getString("nome_pai"),
-                                                res.getDate("data_matricula"), res.getString("tel_responsavel")));
+                                                                res.getString("logradouro"),
+                                                                res.getString("reset_password_token"),
+                                                                res.getString("papel"),
+                                                                res.getString("numero"),
+                                                                res.getString("estado"),
+                                                                res.getString("cidade"),
+                                                                res.getString("country"),
+                                                                res.getString("cep")),
+                                                res.getString("matricula"),
+                                                res.getString("nomeMae"),
+                                                res.getString("nomePai"),
+                                                res.getString("telefoneMae"),
+                                                res.getString("telefonePai"),
+                                                res.getString("emailMae"),
+                                                res.getString("emailPai"),
+                                                res.getDate("data_matricula")));
         }
 
         public Integer gravaAluno(Aluno aluno) {
                 Usuario us = aluno.getUsuario();
-                String sqlUsuario = "insert into usuario(login, senha, rg, telefone, data_nasc, email, nome, cpf, endereco, papel) values(?,?,?,?,?,?,?,?,?,?)";
-                String sqlAluno = "insert into aluno(matricula,nome_mae,nome_pai,data_matricula,tel_responsavel,usuario_login) values(?,?,?,?,?,?)";
+                String sqlUsuario = "insert into usuario(login, senha, rg, telefone, dataNasc, email, nome, cpf, logradouro, papel, numero, estado, cidade, country, cep) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                String sqlAluno = "insert into aluno(matricula, nomeMae, nomePai, telefoneMae, telefonePai, emailMae, emailPai, dataMatricula, usuario_login) values(?,?,?,?,?,?,?,?,?)";
 
                 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -47,9 +59,10 @@ public class AlunoRepository {
                 us.setSenha(encodedPassword);
                 us.setPapel("aluno");
                 jdbc.update(sqlUsuario, us.getLogin(), us.getSenha(), us.getRg(), us.getTelefone(), us.getDataNasc(),
-                                us.getEmail(), us.getNome(), us.getCpf(), us.getEndereco(), us.getPapel());
+                                us.getEmail(), us.getNome(), us.getCpf(), us.getLogradouro(), us.getPapel(),
+                                us.getNumero(), us.getEstado(), us.getCidade(), us.getCountry(), us.getCep());
                 return jdbc.update(sqlAluno, aluno.getMatricula(), aluno.getNomeMae(), aluno.getNomePai(),
-                                aluno.getDataMatricula(), aluno.getTelResponsavel(), aluno.getUsuario().getLogin());
+                                aluno.getTelefoneMae(), aluno.getTelefonePai(), aluno.getEmailMae(), aluno.getEmailPai(), aluno.getDataMatricula(), aluno.getUsuario().getLogin());
         }
 
         public Integer excluirAluno(String id) {
@@ -61,12 +74,13 @@ public class AlunoRepository {
 
         public Integer atualizarAluno(String cpf, Aluno aluno) {
                 Usuario us = aluno.getUsuario();
-                String sqlAluno = "update aluno set matricula = ?,nome_mae = ?,nome_pai = ?,data_matricula = ?,tel_responsavel = ? where usuario_login = ?";
-                String sqlUsuario = "update usuario set rg = ?, telefone = ?, data_nasc = ?, email = ?, nome = ?, cpf = ?, endereco = ? where login = ?";
+                String sqlAluno = "update aluno set matricula = ?,nomeMae = ?,nomePai = ?, telefoneMae = ?, telefonePai = ?, emailMae = ?, emailPai = ?, dataMatricula = ? where usuario_login = ?";
+                String sqlUsuario = "update usuario set rg = ?, telefone = ?, dataNasc = ?, email = ?, nome = ?, cpf = ?, logradouro = ? numero = ?, estado = ?, cidade = ?, country = ?, cep = ? where login = ?";
                 jdbc.update(sqlAluno, aluno.getMatricula(), aluno.getNomeMae(), aluno.getNomePai(),
-                                aluno.getDataMatricula(), aluno.getTelResponsavel(), aluno.getUsuario().getLogin());
-                return jdbc.update(sqlUsuario, us.getRg(), us.getTelefone(), us.getDataNasc(), us.getEmail(),
-                                us.getNome(), us.getCpf(), us.getEndereco(), us.getLogin());
+                aluno.getTelefoneMae(), aluno.getTelefonePai(), aluno.getEmailMae(), aluno.getEmailPai(), aluno.getDataMatricula(), aluno.getUsuario().getLogin());
+                return jdbc.update(sqlUsuario, us.getLogin(), us.getSenha(), us.getRg(), us.getTelefone(), us.getDataNasc(),
+                us.getEmail(), us.getNome(), us.getCpf(), us.getLogradouro(), us.getPapel(),
+                us.getNumero(), us.getEstado(), us.getCidade(), us.getCountry(), us.getCep());
         }
 
         public Aluno buscaPorLogin(String login) {
@@ -75,40 +89,55 @@ public class AlunoRepository {
                                 (res, linha) -> new Aluno(
                                                 new Usuario(res.getString("login"), res.getString("senha"),
                                                                 res.getString("rg"),
-                                                                res.getString("telefone"), res.getDate("data_nasc"),
+                                                                res.getString("telefone"), res.getDate("dataNasc"),
                                                                 res.getString("email"),
                                                                 res.getString("nome"), res.getString("cpf"),
-                                                                res.getString("endereco"),res.getString("reset_password_token"),res.getString("papel")),
-                                                res.getString("matricula"), res.getString("nome_mae"),
-                                                res.getString("nome_pai"),
-                                                res.getDate("data_matricula"), res.getString("tel_responsavel")),
+                                                                res.getString("logradouro"),
+                                                                res.getString("reset_password_token"),
+                                                                res.getString("papel"),
+                                                                res.getString("numero"),
+                                                                res.getString("estado"),
+                                                                res.getString("cidade"),
+                                                                res.getString("country"),
+                                                                res.getString("cep")),
+                                                res.getString("matricula"),
+                                                res.getString("nomeMae"),
+                                                res.getString("nomePai"),
+                                                res.getString("telefoneMae"),
+                                                res.getString("telefonePai"),
+                                                res.getString("emailMae"),
+                                                res.getString("emailPai"),
+                                                res.getDate("dataMatricula")),
                                 login);
         }
 
         public Aluno buscaPorCpf(String cpf) {
-                Aluno aluno = null;
-                try {
-                        aluno = jdbc.queryForObject(
-                                        "select * from aluno, usuario where usuario.login = aluno.usuario_login and usuario.cpf = ? ;",
-                                        (res, rowNum) -> {
-                                                return new Aluno(
-                                                                new Usuario(res.getString("login"),
-                                                                                res.getString("senha"),
-                                                                                res.getString("rg"),
-                                                                                res.getString("telefone"),
-                                                                                res.getDate("data_nasc"),
-                                                                                res.getString("email"),
-                                                                                res.getString("nome"),
-                                                                                res.getString("cpf"),
-                                                                                res.getString("endereco"),res.getString("reset_password_token"),res.getString("papel")),
-                                                                res.getString("matricula"), res.getString("nome_mae"),
-                                                                res.getString("nome_pai"),
-                                                                res.getDate("data_matricula"),
-                                                                res.getString("tel_responsavel"));
-                                        }, new Object[] { cpf });
-                } catch (Exception e) {
-                        System.out.println(e.getLocalizedMessage());
-                }
-                return aluno;
+                return jdbc.queryForObject(
+                                "select * from aluno, usuario where usuario.login = aluno.usuario_login and usuario.cpf = ? ;",
+                                (res, rowNum) -> {
+                                        return new Aluno(
+                                                        new Usuario(res.getString("login"), res.getString("senha"),
+                                                                        res.getString("rg"),
+                                                                        res.getString("telefone"),
+                                                                        res.getDate("dataNasc"),
+                                                                        res.getString("email"),
+                                                                        res.getString("nome"), res.getString("cpf"),
+                                                                        res.getString("logradouro"),
+                                                                        res.getString("reset_password_token"),
+                                                                        res.getString("papel"),
+                                                                        res.getString("numero"),
+                                                                        res.getString("estado"),
+                                                                        res.getString("cidade"),
+                                                                        res.getString("country"),
+                                                                        res.getString("cep")),
+                                                        res.getString("matricula"),
+                                                        res.getString("nomeMae"),
+                                                        res.getString("nomePai"),
+                                                        res.getString("telefoneMae"),
+                                                        res.getString("telefonePai"),
+                                                        res.getString("emailMae"),
+                                                        res.getString("emailPai"),
+                                                        res.getDate("dataMatricula"));
+                                }, new Object[] { cpf });
         }
 }

@@ -19,12 +19,15 @@
       </li>
     </ul>
 
-    <div class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(dangermensage)}">
+    <div class="alert alert-danger" role="alert" th:if="${error}">
+      <span th:text="${error}">!</span>
+  </div>
+  <div class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(dangermensage)}">
       <span th:text="${dangermensage}">!</span>
-    </div>
-    <div class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(sucessmensage)}">
+  </div>
+  <div class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(sucessmensage)}">
       <span th:text="${sucessmensage}">!</span>
-    </div>
+  </div>
 
     <form class="input-group mb-3" th:action="@{/manterprofessores}">
       <input type="text" class="form-control" placeholder="Login ou CPF" th:name="identidadeProfessor" />

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.edu.iftm.SmartSchool.helper.Utils;
 import br.edu.iftm.SmartSchool.model.Aluno;
 import br.edu.iftm.SmartSchool.repository.AlunoRepository;
 
@@ -37,17 +36,17 @@ public class AdminAtualizaAlunoController {
         }
         try {
             repo.gravaAluno(aluno);
-            ra.addFlashAttribute("sucessmensage","Aluno cadastrado com sucesso!");
+            ra.addFlashAttribute("sucessmensage", "Aluno cadastrado com sucesso!");
             return "redirect:/cadastroaluno";
         } catch (DataIntegrityViolationException e) {
             System.out.println("----------------> " + e.getMessage());
-            ra.addFlashAttribute("dangermensage","Já existe um usuário com este nome!");
+            ra.addFlashAttribute("dangermensage", "Já existe um usuário com este nome!");
             return "redirect:/cadastroaluno";
         } catch (Exception e) {
             System.out.println("----------------> " + e.getMessage());
-            ra.addFlashAttribute("dangermensage","Erro catastrofico!");
+            ra.addFlashAttribute("dangermensage", "Erro catastrofico!");
             return "redirect:/cadastroaluno";
-        } 
+        }
     }
 
     @RequestMapping(value = "/manteralunos", method = RequestMethod.GET)
@@ -57,33 +56,40 @@ public class AdminAtualizaAlunoController {
         if (identidadeAluno == null || identidadeAluno.isEmpty()) {
             model.addAttribute("aluno", aluno);
             return "manteralunos";
-        }
-        identidadeAluno = identidadeAluno.replace(".", "").replace("-", "");
-        // Verifica se e CPF ou NOME//
-        if (Utils.isLong(identidadeAluno)) {
-            // Validação deu CPF na busca//
-            if (identidadeAluno.length() < 11 || identidadeAluno.length() > 11) {
-                model.addAttribute("aluno", aluno);
-                return "manteralunos";
-            }
-            Aluno a = repo.buscaPorCpf(identidadeAluno);
-            if (a != null) {
-                aluno = a;
-            }
         } else {
-            // Validação deu nome na busca//
-            Aluno a = repo.buscaPorLogin(identidadeAluno);
-            if (a != null) {
-                aluno = a;
-            }
+                if (identidadeAluno != "") {
+                    if (identidadeAluno.length() != 11) {
+                        try {
+                            Aluno login = repo.buscaPorLogin(identidadeAluno);
+                            aluno = login;
+                        } catch (Exception e) {
+                            model.addAttribute("aluno", aluno);
+                            model.addAttribute("error", "Aluno inexistente");
+                            System.out.println("++++++++++++++++" + e.getLocalizedMessage());
+                            return "manteralunos";
+                        }
+                    }
+                    else{
+                        try {
+                            Aluno cpf = repo.buscaPorCpf(identidadeAluno);
+                            aluno = cpf;
+                        } catch (Exception e) {
+                            model.addAttribute("aluno", aluno);
+                            model.addAttribute("error", "Aluno inexistente");
+                            System.out.println("++++++++++++++++" + e.getLocalizedMessage());
+                            return "manteralunos";
+                        }
+                    }
+                }
         }
         model.addAttribute("aluno", aluno);
         return "manteralunos";
     }
 
     @RequestMapping(value = "/manteralunos", method = RequestMethod.POST)
-    public String atualizarAluno(@RequestParam(value = "usuario.cpf", required = true) String cpf, Aluno aluno, Model model) {
-        
+    public String atualizarAluno(@RequestParam(value = "usuario.cpf", required = true) String cpf, Aluno aluno,
+            Model model) {
+
         Integer result = repo.atualizarAluno(cpf, aluno);
         if (result != null && result > 0) {
             model.addAttribute("sucessmensage", "Aluno atualizado com sucesso!");
@@ -103,3 +109,4 @@ public class AdminAtualizaAlunoController {
         return "redirect:/manteralunos";
     }
 }
+

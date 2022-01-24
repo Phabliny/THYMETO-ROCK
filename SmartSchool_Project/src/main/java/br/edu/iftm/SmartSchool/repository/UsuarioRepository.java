@@ -17,12 +17,17 @@ public class UsuarioRepository {
                 (res, linha) -> {
                     return new Usuario(res.getString("login"), res.getString("senha"),
                     res.getString("rg"),
-                    res.getString("telefone"), res.getDate("data_nasc"),
+                    res.getString("telefone"), res.getDate("dataNasc"),
                     res.getString("email"),
                     res.getString("nome"), res.getString("cpf"),
-                    res.getString("endereco"),
+                    res.getString("logradouro"),
                     res.getString("reset_password_token"),
-                    res.getString("papel"));},
+                    res.getString("papel"),
+                    res.getString("numero"),
+                    res.getString("estado"),
+                    res.getString("cidade"),
+                    res.getString("country"),
+                    res.getString("cep"));},
                 username);
     }
 
@@ -32,12 +37,17 @@ public class UsuarioRepository {
                 (res, linha) -> {
                     return new Usuario(res.getString("login"), res.getString("senha"),
                     res.getString("rg"),
-                    res.getString("telefone"), res.getDate("data_nasc"),
+                    res.getString("telefone"), res.getDate("dataNasc"),
                     res.getString("email"),
                     res.getString("nome"), res.getString("cpf"),
-                    res.getString("endereco"),
+                    res.getString("logradouro"),
                     res.getString("reset_password_token"),
-                    res.getString("papel"));},
+                    res.getString("papel"),
+                    res.getString("numero"),
+                    res.getString("estado"),
+                    res.getString("cidade"),
+                    res.getString("country"),
+                    res.getString("cep"));},
                 email);
     }
 }

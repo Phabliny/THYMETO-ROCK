@@ -75,12 +75,62 @@
                 ></div>
             </div>
             <div class="input-group">
-                <span class="input-group-text">Endereço</span>
+                <span class="input-group-text">Logradouro</span>
                 <input
                     type="text"
                     aria-label="Endereco"
                     class="form-control"
                     th:field="*{usuario.endereco}"
+                    required
+                />
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Número</span>
+                <input
+                    type="text"
+                    aria-label="Número"
+                    class="form-control"
+                    th:field="*{usuario.numero}"
+                    required
+                />
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Estado</span>
+                <input
+                    type="text"
+                    aria-label="Estado"
+                    class="form-control"
+                    th:field="*{usuario.estado}"
+                    required
+                />
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Cidade</span>
+                <input
+                    type="text"
+                    aria-label="Cidade"
+                    class="form-control"
+                    th:field="*{usuario.cidade}"
+                    required
+                />
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Country</span>
+                <input
+                    type="text"
+                    aria-label="Country"
+                    class="form-control"
+                    th:field="*{usuario.country}"
+                    required
+                />
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">CEP</span>
+                <input
+                    type="text"
+                    aria-label="CEP"
+                    class="form-control"
+                    th:field="*{usuario.cep}"
                     required
                 />
             </div>
