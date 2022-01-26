@@ -13,14 +13,13 @@ public class Aluno implements java.io.Serializable {
     private String nomeMae;
     @Size(min=3,message="O nome pai com 3 letras")
     private String nomePai;
+    @NotNull(message = "O telefone não pode ser vazio!")
     private String telefoneMae;
+    @NotNull(message = "O telefone não pode ser vazio!")
     private String telefonePai;
     private String emailMae;
     private String emailPai;
     private Date dataMatricula;
-
-    @NotNull(message = "O telefone não pode ser vazio!")
-    private String telResponsavel;
 
     public Aluno() {
     }

@@ -1,12 +1,9 @@
 package br.edu.iftm.SmartSchool.model;
 
-import javax.validation.constraints.Size;
-
 public class Sala {
     private String cod_sala;
     private String turma;
     private String local_sala;
-    @Size(max = 200,message="Quantidade máxima: 200")
     private Integer qtd_alunos;
 
     public Sala() {

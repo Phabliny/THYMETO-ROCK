@@ -15,19 +15,23 @@ public class UsuarioRepository {
         return jdbc.queryForObject(
                 "select * from usuario where login = ?",
                 (res, linha) -> {
-                    return new Usuario(res.getString("login"), res.getString("senha"),
-                    res.getString("rg"),
-                    res.getString("telefone"), res.getDate("dataNasc"),
-                    res.getString("email"),
-                    res.getString("nome"), res.getString("cpf"),
-                    res.getString("logradouro"),
-                    res.getString("reset_password_token"),
-                    res.getString("papel"),
-                    res.getString("numero"),
-                    res.getString("estado"),
-                    res.getString("cidade"),
-                    res.getString("country"),
-                    res.getString("cep"));},
+                    return new Usuario(
+                            res.getString("login"),
+                            res.getString("senha"),
+                            res.getString("rg"),
+                            res.getString("telefone"),
+                            res.getDate("dataNasc"),
+                            res.getString("email"),
+                            res.getString("nome"),
+                            res.getString("cpf"),
+                            res.getString("papel"),
+                            res.getString("logradouro"),
+                            res.getString("numero"),
+                            res.getString("estado"),
+                            res.getString("cidade"),
+                            res.getString("country"),
+                            res.getString("cep"));
+                },
                 username);
     }
 
@@ -35,19 +39,23 @@ public class UsuarioRepository {
         return jdbc.queryForObject(
                 "select * from usuario where email = ?",
                 (res, linha) -> {
-                    return new Usuario(res.getString("login"), res.getString("senha"),
-                    res.getString("rg"),
-                    res.getString("telefone"), res.getDate("dataNasc"),
-                    res.getString("email"),
-                    res.getString("nome"), res.getString("cpf"),
-                    res.getString("logradouro"),
-                    res.getString("reset_password_token"),
-                    res.getString("papel"),
-                    res.getString("numero"),
-                    res.getString("estado"),
-                    res.getString("cidade"),
-                    res.getString("country"),
-                    res.getString("cep"));},
+                    return new Usuario(
+                        res.getString("login"),
+                        res.getString("senha"),
+                        res.getString("rg"),
+                        res.getString("telefone"),
+                        res.getDate("dataNasc"),
+                        res.getString("email"),
+                        res.getString("nome"),
+                        res.getString("cpf"),
+                        res.getString("papel"),
+                        res.getString("logradouro"),
+                        res.getString("numero"),
+                        res.getString("estado"),
+                        res.getString("cidade"),
+                        res.getString("country"),
+                        res.getString("cep"));
+                },
                 email);
     }
 }

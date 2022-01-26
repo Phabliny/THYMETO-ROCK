@@ -21,7 +21,6 @@ public class Usuario implements java.io.Serializable {
 	private String nome;
 	@Size(min = 11, message = "O CPF deve possuir exatamente 11 digitos, apenas números!")
 	private String cpf;
-	private String reset_password_token;
 	private String papel;
 	private String logradouro;
 	private String numero;
@@ -33,9 +32,22 @@ public class Usuario implements java.io.Serializable {
 	public Usuario() {
 	}
 
-	public Usuario(String login, String senha, String rg, String telefone, Date dataNasc, String email, String nome,
-			String cpf, String reset_password_token, String papel, String logradouro,
-			String numero, String estado, String cidade, String country, String cep) {
+	public Usuario(
+			String login,
+			String senha,
+			String rg,
+			String telefone,
+			Date dataNasc,
+			String email,
+			String nome,
+			String cpf,
+			String papel,
+			String logradouro,
+			String numero,
+			String estado,
+			String cidade,
+			String country,
+			String cep) {
 		this.login = login;
 		this.senha = senha;
 		this.rg = rg;
@@ -44,14 +56,13 @@ public class Usuario implements java.io.Serializable {
 		this.email = email;
 		this.nome = nome;
 		this.cpf = cpf;
-		this.reset_password_token = reset_password_token;
 		this.papel = papel;
 		this.logradouro = logradouro;
-		this.logradouro = numero;
-		this.logradouro = estado;
-		this.logradouro = cidade;
-		this.logradouro = country;
-		this.logradouro = cep;
+		this.numero = numero;
+		this.estado = estado;
+		this.cidade = cidade;
+		this.country = country;
+		this.cep = cep;
 	}
 
 	public String getLogin() {
@@ -118,28 +129,20 @@ public class Usuario implements java.io.Serializable {
 		this.cpf = cpf;
 	}
 
-	public String getLogradouro() {
-		return this.logradouro;
-	}
-
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-
-	public String getReset_password_token() {
-		return this.reset_password_token;
-	}
-
-	public void setReset_password_token(String reset_password_token) {
-		this.reset_password_token = reset_password_token;
-	}
-
 	public String getPapel() {
 		return this.papel;
 	}
 
 	public void setPapel(String papel) {
 		this.papel = papel;
+	}
+
+	public String getLogradouro() {
+		return this.logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
 	}
 
 	public String getNumero() {
