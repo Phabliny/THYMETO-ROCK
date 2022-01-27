@@ -19,12 +19,15 @@
       </li>
     </ul>
 
-    <div class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(dangermensage)}">
+    <div class="alert alert-danger" role="alert" th:if="${error}">
+      <span th:text="${error}">!</span>
+  </div>
+  <div class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(dangermensage)}">
       <span th:text="${dangermensage}">!</span>
-    </div>
-    <div class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(sucessmensage)}">
+  </div>
+  <div class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(sucessmensage)}">
       <span th:text="${sucessmensage}">!</span>
-    </div>
+  </div>
 
     <form class="input-group mb-3" th:action="@{/manterprofessores}">
       <input type="text" class="form-control" placeholder="Login ou CPF" th:name="identidadeProfessor" />
@@ -50,8 +53,28 @@
           th:errors="*{usuario.telefone}"></div>
       </div>
       <div class="input-group">
-        <span class="input-group-text">Endereço</span>
-        <input type="text" aria-label="Endereco" class="form-control" th:field="*{usuario.endereco}" required />
+        <span class="input-group-text">Logradouro</span>
+        <input type="text" aria-label="Logradouro" class="form-control" th:field="*{usuario.logradouro}" required />
+      </div>
+      <div class="input-group">
+        <span class="input-group-text">Número</span>
+        <input type="number" aria-label="Número" class="form-control" th:field="*{usuario.numero}" required />
+      </div>
+      <div class="input-group">
+        <span class="input-group-text">Estado</span>
+        <input type="text" aria-label="Estado" class="form-control" th:field="*{usuario.estado}" required />
+      </div>
+      <div class="input-group">
+        <span class="input-group-text">Cidade</span>
+        <input type="text" aria-label="Cidade" class="form-control" th:field="*{usuario.cidade}" required />
+      </div>
+      <div class="input-group">
+        <span class="input-group-text">País</span>
+        <input type="text" aria-label="País" class="form-control" th:field="*{usuario.country}" required />
+      </div>
+      <div class="input-group">
+        <span class="input-group-text">CEP</span>
+        <input type="number" aria-label="CEP" class="form-control" th:field="*{usuario.cep}" required />
       </div>
       <div class="input-group">
         <span class="input-group-text">Data de Nascimento</span>

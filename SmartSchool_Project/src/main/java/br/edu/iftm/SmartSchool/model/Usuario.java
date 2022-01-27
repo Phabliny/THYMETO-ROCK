@@ -9,26 +9,45 @@ import org.springframework.validation.annotation.Validated;
 
 @Validated
 public class Usuario implements java.io.Serializable {
-    //@Pattern(regexp = "/\\S+@", message="A palavra de login deve terminar com @")
-	@Size(max=10,message = "A palavra de login deve possuir no máximo 10 caracteres")
+	// @Pattern(regexp = "/\\S+@", message="A palavra de login deve terminar com @")
+	@Size(max = 10, message = "A palavra de login deve possuir no máximo 10 caracteres")
 	private String login;
 	private String senha;
 	private String rg;
-	@NotNull (message = "O telefone não pode ser vazio!")
+	@NotNull(message = "O telefone não pode ser vazio!")
 	private String telefone;
 	private Date dataNasc;
 	private String email;
 	private String nome;
 	@Size(min = 11, message = "O CPF deve possuir exatamente 11 digitos, apenas números!")
 	private String cpf;
-	private String endereco;
-	private String reset_password_token;
 	private String papel;
+	private String logradouro;
+	private String numero;
+	private String estado;
+	private String cidade;
+	private String country;
+	private String cep;
 
 	public Usuario() {
 	}
 
-	public Usuario(String login, String senha, String rg, String telefone, Date dataNasc, String email, String nome, String cpf, String endereco, String reset_password_token, String papel) {
+	public Usuario(
+			String login,
+			String senha,
+			String rg,
+			String telefone,
+			Date dataNasc,
+			String email,
+			String nome,
+			String cpf,
+			String papel,
+			String logradouro,
+			String numero,
+			String estado,
+			String cidade,
+			String country,
+			String cep) {
 		this.login = login;
 		this.senha = senha;
 		this.rg = rg;
@@ -37,9 +56,13 @@ public class Usuario implements java.io.Serializable {
 		this.email = email;
 		this.nome = nome;
 		this.cpf = cpf;
-		this.endereco = endereco;
-		this.reset_password_token = reset_password_token;
 		this.papel = papel;
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.estado = estado;
+		this.cidade = cidade;
+		this.country = country;
+		this.cep = cep;
 	}
 
 	public String getLogin() {
@@ -106,22 +129,6 @@ public class Usuario implements java.io.Serializable {
 		this.cpf = cpf;
 	}
 
-	public String getEndereco() {
-		return this.endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-
-	public String getReset_password_token() {
-		return this.reset_password_token;
-	}
-
-	public void setReset_password_token(String reset_password_token) {
-		this.reset_password_token = reset_password_token;
-	}
-
 	public String getPapel() {
 		return this.papel;
 	}
@@ -129,4 +136,53 @@ public class Usuario implements java.io.Serializable {
 	public void setPapel(String papel) {
 		this.papel = papel;
 	}
+
+	public String getLogradouro() {
+		return this.logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
 }

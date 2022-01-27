@@ -8,15 +8,25 @@ CREATE TABLE IF NOT EXISTS `usuario`
 (11) NOT NULL,
   `telefone` varchar
 (11) DEFAULT NULL,
-  `data_nasc` date NOT NULL,
+  `dataNasc` date NOT NULL,
   `email` varchar
 (50) NOT NULL UNIQUE,
   `nome` varchar
 (100) NOT NULL,
   `cpf` VARCHAR
 (11) NOT NULL UNIQUE,
-  `endereco` varchar
+  `logradouro` varchar
 (200) DEFAULT NULL,
+  `numero` varchar
+(200) DEFAULT NULL,
+  `estado` varchar
+(200) DEFAULT NULL,
+  `cidade` varchar
+(200) DEFAULT NULL,
+  `country` varchar
+(200) DEFAULT NULL,
+  `cep` varchar
+(8) DEFAULT NULL,
   `reset_password_token` varchar
 (45) DEFAULT NULL,
 `papel` SET ('admin', 'aluno', 'professor'),
@@ -45,13 +55,19 @@ CREATE TABLE IF NOT EXISTS `aluno`
 (
   `matricula` varchar
 (14) DEFAULT NULL,
-  `nome_mae` varchar
+  `nomeMae` varchar
 (100) DEFAULT NULL,
-  `nome_pai` varchar
+  `nomePai` varchar
 (100) DEFAULT NULL,
-  `data_matricula` date NOT NULL,
-  `tel_responsavel` varchar
+  `emailMae` varchar
+(100) DEFAULT NULL,
+  `emailPai` varchar
+(100) DEFAULT NULL,
+  `telefoneMae` varchar
 (11) DEFAULT NULL,
+  `telefonePai` varchar
+(11) DEFAULT NULL,
+ `dataMatricula` date NOT NULL,
   `usuario_login` varchar
 (10) NOT NULL,
   PRIMARY KEY

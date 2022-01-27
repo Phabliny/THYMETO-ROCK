@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.edu.iftm.SmartSchool.helper.Utils;
 import br.edu.iftm.SmartSchool.model.Professor;
 import br.edu.iftm.SmartSchool.repository.ProfessorRepository;
 
@@ -23,80 +22,86 @@ public class AdminAtualizaProfessorController {
     @Autowired
     ProfessorRepository repoP;
 
-    @GetMapping (value = "cadastroprofessor")
-    String cadastroProfessor(Model model){
+    @GetMapping(value = "cadastroprofessor")
+    String cadastroProfessor(Model model) {
         model.addAttribute("professor", new Professor());
         return "cadastroprofessor";
     }
 
-    @PostMapping (value = "cadastroprofessor")
-    public String gravarProfessor(@Valid Professor professor, BindingResult bindingResult, RedirectAttributes raP){
-        if(bindingResult.hasErrors()) {
+    @PostMapping(value = "cadastroprofessor")
+    public String gravarProfessor(@Valid Professor professor, BindingResult bindingResult, RedirectAttributes raP) {
+        if (bindingResult.hasErrors()) {
             return "cadastroprofessor";
         }
         try {
             repoP.gravarProfessor(professor);
-            raP.addFlashAttribute("sucessmensage","Professor cadastrado com sucesso!");
-            
+            raP.addFlashAttribute("sucessmensage", "Professor cadastrado com sucesso!");
+
             return "redirect:/cadastroprofessor";
         } catch (DataIntegrityViolationException e) {
             System.out.println("----------------> " + e.getMessage());
-            raP.addFlashAttribute("dangermensage","Já existe um usuário com este nome!");
+            raP.addFlashAttribute("dangermensage", "Já existe um usuário com este nome!");
             return "redirect:/cadastroprofessor";
         } catch (Exception e) {
             System.out.println("----------------> " + e.getMessage());
-            raP.addFlashAttribute("dangermensage","Erro catastrofico!");
+            raP.addFlashAttribute("dangermensage", "Erro catastrofico!");
             return "redirect:/cadastroprofessor";
-        } 
+        }
     }
 
-    @RequestMapping (value = "/manterprofessores", method = RequestMethod.GET)
-	public String buscaDadosProfessor(@RequestParam(value = "identidadeProfessor", required = false) String identidadeProfessor, Model model) {
+    @RequestMapping(value = "/manterprofessores", method = RequestMethod.GET)
+    public String buscaDadosProfessor(
+            @RequestParam(value = "identidadeProfessor", required = false) String identidadeProfessor, Model model) {
         Professor professor = new Professor();
-        if(identidadeProfessor == null || identidadeProfessor.isEmpty()){
+        if (identidadeProfessor == null || identidadeProfessor.isEmpty()) {
             model.addAttribute("professor", professor);
             return "manterprofessores";
-        }
-        identidadeProfessor = identidadeProfessor.replace(".", "").replace("-", "");
-		//Verifica se e CPF ou NOME//
-        if(Utils.isLong(identidadeProfessor)){
-            //Validação deu CPF na busca//
-            if(identidadeProfessor.length() < 11 || identidadeProfessor.length() > 11){
-                model.addAttribute("professor", professor);
-                return "manterprofessores";
-            }
-            Professor p = repoP.buscaPorCpfP(identidadeProfessor);
-            if(p != null){
-                professor = p;
-            }
-        } else{
-            //Validação deu nome na busca//
-            Professor p = repoP.buscaPorLoginP(identidadeProfessor);
-            if(p != null){
-                professor = p;
+        } else {
+            if (identidadeProfessor != "") {
+                if (identidadeProfessor.length() != 11) {
+                    try {
+                        Professor login = repoP.buscaPorLoginP(identidadeProfessor);
+                        professor = login;
+                    } catch (Exception e) {
+                        model.addAttribute("professor", professor);
+                        model.addAttribute("error", "Professor inexistente");
+                        return "manterprofessores";
+                    }
+                } else {
+                    try {
+                        Professor cpf = repoP.buscaPorCpfP(identidadeProfessor);
+                        professor = cpf;
+                    } catch (Exception e) {
+                        model.addAttribute("professor", professor);
+                        model.addAttribute("error", "Professor inexistente");
+                        return "manterprofessores";
+                    }
+                }
             }
         }
         model.addAttribute("professor", professor);
-		return "manterprofessores";
-	}
+        return "manterprofessores";
+    }
 
     @RequestMapping(value = "/manterprofessores", method = RequestMethod.POST)
-	public String atualizarProfessor(@RequestParam(value = "usuario.cpf", required = true) String cpf, Professor professor, Model model) {
-		Integer result = repoP.atualizarProfessor(cpf, professor);
-        if(result != null && result > 0){
+    public String atualizarProfessor(@RequestParam(value = "usuario.cpf", required = true) String cpf,
+            Professor professor, Model model) {
+        Integer result = repoP.atualizarProfessor(cpf, professor);
+        if (result != null && result > 0) {
             model.addAttribute("sucessmensage", "Professor atualizado com sucesso!");
         }
         model.addAttribute("professorModel", new Professor());
-		return "manterprofessores";
-	}
+        return "manterprofessores";
+    }
 
-	@RequestMapping(value = "/manterprofessores", method = RequestMethod.DELETE)
-	public String excluirProfessor(@RequestParam(value = "login", required = true) String login, Model model, RedirectAttributes raP) {
-		Integer result= repoP.excluirProfessor(login);
+    @RequestMapping(value = "/manterprofessores", method = RequestMethod.DELETE)
+    public String excluirProfessor(@RequestParam(value = "login", required = true) String login, Model model,
+            RedirectAttributes raP) {
+        Integer result = repoP.excluirProfessor(login);
 
-        if(result != null && result > 0){
+        if (result != null && result > 0) {
             raP.addFlashAttribute("sucessmensage", "Professor excluido com sucesso!");
         }
-		return "redirect:/manterprofessores";
-	}
+        return "redirect:/manterprofessores";
+    }
 }

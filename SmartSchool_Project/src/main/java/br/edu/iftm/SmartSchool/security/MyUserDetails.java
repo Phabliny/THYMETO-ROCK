@@ -16,8 +16,8 @@ public class MyUserDetails implements UserDetails {
         this.usuario = usuario;
     }
 
-    public String getUsuarioId() {
-        return usuario.getLogin();
+    public Usuario getUsuario() {
+        return usuario;
     }
     
     @Override

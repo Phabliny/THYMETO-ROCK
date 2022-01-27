@@ -32,18 +32,13 @@
         </li>
     </ul>
 
-    <div
-        class="alert alert-danger"
-        role="alert"
-        th:if="${!#strings.isEmpty(dangermensage)}"
-    >
+    <div class="alert alert-danger" role="alert" th:if="${error}">
+        <span th:text="${error}">!</span>
+    </div>
+    <div class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(dangermensage)}">
         <span th:text="${dangermensage}">!</span>
     </div>
-    <div
-        class="alert alert-success"
-        role="alert"
-        th:if="${!#strings.isEmpty(sucessmensage)}"
-    >
+    <div class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(sucessmensage)}">
         <span th:text="${sucessmensage}">!</span>
     </div>
 
@@ -80,6 +75,7 @@
                 readonly
             />
         </div>
+
         <div class="input-group">
             <span class="input-group-text">RG</span>
             <input
@@ -108,12 +104,62 @@
             ></div>
         </div>
         <div class="input-group">
-            <span class="input-group-text">Endereço</span>
+            <span class="input-group-text">Logradouro</span>
             <input
                 type="text"
-                aria-label="Endereco"
+                aria-label="Logradouro"
                 class="form-control"
-                th:field="*{usuario.endereco}"
+                th:field="*{usuario.logradouro}"
+                required
+            />
+        </div>
+        <div class="input-group">
+            <span class="input-group-text">Número</span>
+            <input
+                type="number"
+                aria-label="Número"
+                class="form-control"
+                th:field="*{usuario.numero}"
+                required
+            />
+        </div>
+        <div class="input-group">
+            <span class="input-group-text">Estado</span>
+            <input
+                type="text"
+                aria-label="Estado"
+                class="form-control"
+                th:field="*{usuario.estado}"
+                required
+            />
+        </div>
+        <div class="input-group">
+            <span class="input-group-text">Cidade</span>
+            <input
+                type="text"
+                aria-label="Cidade"
+                class="form-control"
+                th:field="*{usuario.cidade}"
+                required
+            />
+        </div>
+        <div class="input-group">
+            <span class="input-group-text">País</span>
+            <input
+                type="text"
+                aria-label="País"
+                class="form-control"
+                th:field="*{usuario.country}"
+                required
+            />
+        </div>
+        <div class="input-group">
+            <span class="input-group-text">CEP</span>
+            <input
+                type="number"
+                aria-label="CEP"
+                class="form-control"
+                th:field="*{usuario.cep}"
                 required
             />
         </div>
@@ -205,21 +251,41 @@
         </div>
         <div class="input-group">
             <span class="input-group-text"
-                >Telefone do responsável</span
+                >Telefone do responsável 1:</span
             >
             <input
                 type="number"
                 aria-label="Telefone"
                 class="form-control"
-                th:field="*{telResponsavel}"
+                th:field="*{telefoneMae}"
                 maxlength="11"
                 required
             />
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('telefoneMae')}" th:errors="*{telefoneMae}"></div>
         </div>
-        <div
+         <div
             class="alert alert-warning"
-            th:if="${#fields.hasErrors('telResponsavel')}"
-            th:errors="*{telResponsavel}"
+            th:if="${#fields.hasErrors('telefoneMae')}"
+            th:errors="*{telefoneMae}"
+        ></div>
+        <div class="input-group">
+            <span class="input-group-text"
+                >Telefone do responsável 2:</span
+            >
+            <input
+                type="number"
+                aria-label="Telefone"
+                class="form-control"
+                th:field="*{telefonePai}"
+                maxlength="11"
+                required
+            />
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('telefonePai')}" th:errors="*{telefonePai}"></div>
+        </div>
+         <div
+            class="alert alert-warning"
+            th:if="${#fields.hasErrors('telefonePai')}"
+            th:errors="*{telefonePai}"
         ></div>
         <div class="d-grid gap-2 col-3 mx-auto p-3">
             <button class="btn btn-primary btn-sm" type="submit">

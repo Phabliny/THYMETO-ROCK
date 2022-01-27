@@ -27,27 +27,51 @@
     <div class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(sucessmensage)}">
         <span th:text="${sucessmensage}">!</span>
     </div>
-    <form action="" class="vh-100" th:action="@{/cadastrosala}" method="POST" th:object="${sala}">
+    <form 
+      action="" 
+      th:action="@{/cadastrosala}" 
+      method="POST" 
+      th:object="${sala}"
+      class="mb-4" 
+    >
         <div class="input-group">
             <span class="input-group-text">Turma</span>
-            <input type="text" aria-label="Código" class="form-control" th:field="*{turma}" />
+            <input 
+              type="text" 
+              aria-label="Código" class="form-control" 
+              th:field="*{turma}" 
+              required
+            />
         </div>
         <div class="input-group">
             <span class="input-group-text">Código da Sala</span>
-            <input type="number" aria-label="Código" class="form-control" th:field="*{cod_sala}" />
+            <input 
+              type="number" 
+              aria-label="Código" class="form-control" 
+              th:field="*{cod_sala}" 
+              required
+            />
         </div>
         <div class="input-group">
             <span class="input-group-text">Qtd. Alunos</span>
-            <input type="number" aria-label="Qtd" class="form-control" th:field="*{qtd_alunos}" />
+            <input 
+              type="number" 
+              aria-label="Qtd" class="form-control" 
+              th:field="*{qtd_alunos}" 
+              required
+            />
         </div>
         <div class="input-group">
             <span class="input-group-text">Local da Sala</span>
-            <input type="text" aria-label="sala" class="form-control" th:field="*{local_sala}" />
+            <input 
+              type="text" 
+              aria-label="sala" class="form-control" 
+              th:field="*{local_sala}" 
+              required
+            />
         </div>
-        <div class="d-grid gap-2 col-3 mx-auto p-3">
-            <button class="btn btn-primary btn-sm" type="submit">
-                Cadastrar
-            </button>
+        <div class="d-grid gap-2 col-sm-2 mx-auto pb-5">
+            <input class="btn btn-primary btn-lg mt-4 ml-3" value="Cadastrar" type="submit" />
         </div>
     </form>
 </div>
